@@ -87,12 +87,6 @@ class NetworkClient private constructor(
                 output.flush()
                 val input = BufferedReader(InputStreamReader(socket.getInputStream()))
 
-                /*var resp:String=""
-                while (input.readLine().also { resp = it } != null){
-                    println(resp)
-                }
-                output1.close()*/
-
                 // Construct the HTTP request
                 val requestLine = "${request.method} ${url.file} HTTP/1.1\r\n"
                 val requestHeaders = defaultHeaders + request.headers
@@ -106,17 +100,15 @@ class NetworkClient private constructor(
                 val responseHeaders = mutableMapOf<String, String>()
                 var responseBody = ""
                 var statusCode = 0
-
-
-
-
-                while (input.readLine() !=null && input.readLine().also { responseBody = it } != null){
-                    if (responseBody.startsWith("HTTP/1.1")){
+                while (input.readLine().also { if (it !=null) responseBody = it } != null){
+                    if (statusCode == 0){
                         statusCode = responseBody.split(" ")[1].toInt()
                     }
-                    if (responseBody.contains(":") && !responseBody.startsWith("{")) {
-                        val headerParts = responseBody.split(":")
-                        responseHeaders[headerParts[0].trim()] = headerParts[1].trim()
+                    if (responseBody.contains(":")) {
+                        val headerParts = responseBody.split(":", limit = 2)
+                        if (headerParts.size == 2 && !responseBody.startsWith("{")) {
+                            responseHeaders[headerParts[0].trim()] = headerParts[1].trim()
+                        }
                     }
                 }
 
