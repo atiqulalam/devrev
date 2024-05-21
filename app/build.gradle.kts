@@ -3,6 +3,7 @@ plugins {
     kotlin("kapt")
     id ("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id ("kotlin-parcelize")
     alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
@@ -22,6 +23,9 @@ android {
             useSupportLibrary = true
         }
     }
+    buildFeatures{
+        buildConfig = true
+    }
 
     buildTypes {
         release {
@@ -30,7 +34,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
         }
+        debug {
+            buildConfigField("String","API_KEY","\"909594533c98883408adef5d56143539\"")
+            buildConfigField("String","BASE_URL","\"http://api.themoviedb.org\"")
+        }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -64,6 +74,20 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation (libs.gson)
     implementation(libs.hilt.android)
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    implementation (libs.kotlin.stdlib)
+
+    implementation (libs.ui)
+    implementation (libs.androidx.material)
+    implementation (libs.ui.tooling)
+    implementation (libs.androidx.lifecycle.runtime.ktx.v231)
+    implementation (libs.androidx.activity.compose.v131)
+    implementation (libs.androidx.navigation.compose)
+
+    //glide
+    implementation (libs.glide)
+    annotationProcessor (libs.compiler)
+    implementation (libs.glide.transformations)
 
     kapt(libs.hilt.android.compiler)
     implementation(project(":devrevsdk"))
@@ -74,4 +98,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation (libs.mockito.core)
+    testImplementation (libs.kotlinx.coroutines.test)
+    testImplementation (libs.androidx.core.testing)
 }

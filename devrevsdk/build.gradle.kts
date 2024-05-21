@@ -1,5 +1,8 @@
+import io.netty.util.ReferenceCountUtil.release
+
 plugins {
     id("com.android.library")
+    id("maven-publish")
     alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
@@ -34,6 +37,24 @@ android {
         jvmTarget = "1.8"
     }
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                groupId = "com.github.atiqulalam"
+                artifactId = "devrev"
+                version = "1.0.0"
+
+                afterEvaluate {
+                    from(components["release"])
+                }
+            }
+        }
+    }
+
+}
+
 
 dependencies {
 

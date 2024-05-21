@@ -33,10 +33,12 @@ object NetworkModule {
     @Singleton
     fun provideNetworkClient(converterFactory: GsonConverterFactory): NetworkClient {
         return NetworkClient.Builder()
-            .setBaseUrl("http://api.themoviedb.org")
+            .setBaseUrl(BuildConfig.BASE_URL)
             .addHeader("Accept", "application/json")
             .addHeader("Content-Type", "application/json")//Content-Type: text/html
             .addHeader("User-Agent", userAgent)
+            .setConnectionTimeout(10) // seconds
+            .setReadTimeout(10) // seconds
             .enableLogging(true)
             .setConverterFactory(converterFactory)
             .build()
