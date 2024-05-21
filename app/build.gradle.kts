@@ -85,7 +85,7 @@ dependencies {
 
     //glide
     implementation (libs.glide)
-    annotationProcessor (libs.compiler)
+    kapt(libs.compiler)
     implementation (libs.glide.transformations)
 
     kapt(libs.hilt.android.compiler)
