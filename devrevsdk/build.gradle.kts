@@ -3,7 +3,11 @@ import io.netty.util.ReferenceCountUtil.release
 plugins {
     id("com.android.library")
     id("maven-publish")
+    id("kotlin-kapt")
     alias(libs.plugins.jetbrainsKotlinAndroid)
+}
+kapt {
+    correctErrorTypes = true
 }
 
 android {

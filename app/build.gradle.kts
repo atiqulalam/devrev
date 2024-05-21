@@ -5,6 +5,9 @@ plugins {
     id ("kotlin-parcelize")
     alias(libs.plugins.jetbrainsKotlinAndroid)
 }
+kapt {
+    correctErrorTypes = true
+}
 
 android {
     namespace = "com.example.devrev"
