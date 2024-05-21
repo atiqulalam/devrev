@@ -36,7 +36,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
+            buildConfigField("String","API_KEY","\"909594533c98883408adef5d56143539\"")
+            buildConfigField("String","BASE_URL","\"http://api.themoviedb.org\"")
         }
         debug {
             buildConfigField("String","API_KEY","\"909594533c98883408adef5d56143539\"")
