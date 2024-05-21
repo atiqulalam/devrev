@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
     kotlin("kapt")
-    id ("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id ("kotlin-parcelize")
     alias(libs.plugins.jetbrainsKotlinAndroid)
