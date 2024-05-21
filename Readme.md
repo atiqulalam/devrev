@@ -52,3 +52,17 @@ networkClient.post("/3/movie/$movieId",MovieDetail(),
          // error handling
   }  
     })
+**Step 1.** Add the JitPack repository to your build file
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+**Step 2.** Add the dependency
+dependencies {
+implementation 'com.github.atiqulalam:devrev:1.0.0'
+}
+
